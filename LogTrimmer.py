@@ -29,5 +29,8 @@ def trimmer():
 
 if name == "main":
     while(True):
-        trimmer()
+        try:
+            trimmer()
+        except:
+            pass
         time.sleep(3600)
