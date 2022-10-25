@@ -10,10 +10,11 @@ def trimmer():
     log_storage = "/log_storage"
     time_created = time.time()
     oldest_file = ""
-    return_nodine_size = subprocess.Popen(["sudo", "du", "-hs", nodine_log_path], stdout=subprocess.PIPE)
+    return_nodine_size = subprocess.Popen(["sudo", "du", nodine_log_path], stdout=subprocess.PIPE)
     size_text = return_nodine_size.communicate()[0].decode()
     size_f = size_text.split("\t")[0]
-    if (float(size_f[:-1]) > 200 and size_f[-1] == "G") or ((time.time() - last_trimmed) > 432000):
+    #200GB =~ 210000000KB
+    if (float(size_f) > 210000000) or ((time.time() - last_trimmed) > 432000):
         for root, dirs, files in os.walk(log_storage):
             if len(files) >= backup_num:
                 for file in files:
