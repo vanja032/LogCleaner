@@ -15,6 +15,7 @@ def trimmer():
     size_text = return_nodine_size.communicate()[0].decode()
     size_f = size_text.split("\t")[0]
     subprocess.run(["echo", "Size of file ", str(size_f), "\n", "Last trimmed ", str(last_trimmed)])
+    # 200GB =~ 210,000,000.00 KB
     if (float(size_f) > 210000000) or ((time.time() - last_trimmed) > 432000):
         for root, dirs, files in os.walk(log_storage):
             if len(files) >= 5:
